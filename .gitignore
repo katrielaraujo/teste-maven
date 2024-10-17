@@ -1,0 +1,41 @@
+# Diretório de saída do Maven
+/target/
+
+# Arquivos de log
+*.log
+
+# Diretórios do Eclipse
+/.classpath
+/.project
+/.settings/
+
+# Diretórios do IntelliJ IDEA
+/.idea/
+/*.iml
+
+# Diretórios do NetBeans
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Arquivos gerados por sistema operacional
+.DS_Store
+Thumbs.db
+
+# Diretórios de Maven
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Arquivos de build temporários do Maven
+dependency-reduced-pom.xml
+release.properties
+
+# Arquivos de cache de IDEs
+*~ 
+*.swp
+
+# Arquivos de lock do Maven
+target/mvn-*.lock
