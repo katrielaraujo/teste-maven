@@ -5,6 +5,17 @@ public class Disciplina {
 	
 	private String codigo;
 
+	
+
+	public Disciplina(String nome) {
+		this.nome = nome;
+	}
+
+	public Disciplina(String nome, String codigo) {
+		this.nome = nome;
+		this.codigo = codigo;
+	}
+
 	public String getNome() {
 		return nome;
 	}

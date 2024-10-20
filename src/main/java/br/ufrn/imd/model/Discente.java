@@ -5,6 +5,15 @@ public class Discente {
 	
 	private Integer matricula;
 	
+	public Discente(String nome, Integer matricula) {
+		this.nome = nome;
+		this.matricula = matricula;
+	}
+
+	public Discente(String nome){
+		this.nome = nome;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -18,4 +27,7 @@ public class Discente {
 		this.matricula = matricula;
 	}
 	
+	public void consolidacaoParcial(){
+		
+	}
 }

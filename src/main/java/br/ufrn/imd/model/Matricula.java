@@ -17,7 +17,7 @@ public class Matricula {
 	
 	private StatusAprovacao status;
 
-	Matricula(Discente discente, Turma turma) {
+	public Matricula(Discente discente, Turma turma) {
 		this.discente = discente;
 		this.turma = turma;
 	}
@@ -62,9 +62,41 @@ public class Matricula {
 		return turma;
 	}
 
+	public boolean compareMedia(int n){
+		BigDecimal media = calcularMediaParcial();
+		return media.compareTo(BigDecimal.valueOf(n)) == 1 || media.compareTo(BigDecimal.valueOf(n)) == 0;
+	}
+
+	public boolean notasPorUnidade(int n){
+		boolean unit01 = nota1.compareTo(BigDecimal.valueOf(n)) == 1 || nota1.compareTo(BigDecimal.valueOf(n)) == 0; 
+		boolean unit02 = nota2.compareTo(BigDecimal.valueOf(n)) == 1 || nota2.compareTo(BigDecimal.valueOf(n)) == 0; 
+		boolean unit03 = nota3.compareTo(BigDecimal.valueOf(n)) == 1 || nota3.compareTo(BigDecimal.valueOf(n)) == 0;
+
+		return unit01 && unit02 && unit03;
+	}
+
 	public void consolidarParcialmente() {
-		// TODO Implementar aqui a lógica de consolidação parcial
-		this.setStatus(StatusAprovacao.APR);
+		boolean mediaAprovacao =  compareMedia(6);
+		boolean unidadeAprovacao = notasPorUnidade(4);
+		boolean frenquenciaNecessaria = frequencia >= 75;
+
+		boolean mediaReposicao = compareMedia(3);
+
+		boolean mediaReprovacao = mediaAprovacao && mediaReposicao;
+
+		if(mediaAprovacao && unidadeAprovacao && frenquenciaNecessaria){
+			this.setStatus(StatusAprovacao.APR);
+		}else if(mediaReposicao && frenquenciaNecessaria){
+			this.setStatus(StatusAprovacao.REC);
+		}else{
+			if(!mediaReprovacao && frenquenciaNecessaria){
+				this.setStatus(StatusAprovacao.REP);
+			}else if(mediaAprovacao && !frenquenciaNecessaria){
+				this.setStatus(StatusAprovacao.REPF);
+			}else{
+				this.setStatus(StatusAprovacao.REPMF);
+			}
+		}
 	}
 
 	public StatusAprovacao getStatus() {
@@ -73,5 +105,10 @@ public class Matricula {
 
 	private void setStatus(StatusAprovacao status) {
 		this.status = status;
+	}
+
+	public BigDecimal calcularMediaParcial(){
+		BigDecimal mediaParcial = nota1.add(nota2).add(nota3);
+		return mediaParcial.divide(BigDecimal.valueOf(3L));
 	}
 }

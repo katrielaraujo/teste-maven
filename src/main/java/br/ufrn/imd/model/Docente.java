@@ -5,6 +5,17 @@ public class Docente {
 	
 	private Integer siape;
 
+	
+
+	public Docente(String nome, Integer siape) {
+		this.nome = nome;
+		this.siape = siape;
+	}
+
+	public Docente(String nome) {
+		this.nome = nome;
+	}
+
 	public String getNome() {
 		return nome;
 	}
